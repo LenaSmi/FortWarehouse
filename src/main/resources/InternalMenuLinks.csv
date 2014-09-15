@@ -1,0 +1,4 @@
+Order Upload,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=upload.showForm,Batch File Upload,.//*[@id='uploadForm']/table[3]/tbody/tr[21]/td/b,Orders
+Order Upload -- Secured,https://dev.fortwarehouse.com/wsn_v2/index.cfm?fuseaction=upload.showForm,Batch File Upload,.//*[@id='uploadForm']/table[3]/tbody/tr[21]/td/b,Orders
+Order Search,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=orders.home,Format:,html/body/div[1]/div/form/table/tbody/tr[25]/td[1]/label,Orders
+Add Order,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=orders.addOrder,Process Credit Card Freight Charge:,.//*[@id='orderForm']/table/tbody/tr[13]/td/table/tbody/tr[7]/td[1],Orders
