@@ -1,4 +1,34 @@
-Order Upload,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=upload.showForm,Batch File Upload,.//*[@id='uploadForm']/table[3]/tbody/tr[21]/td/b,Orders
-Order Upload -- Secured,https://dev.fortwarehouse.com/wsn_v2/index.cfm?fuseaction=upload.showForm,Batch File Upload,.//*[@id='uploadForm']/table[3]/tbody/tr[21]/td/b,Orders
-Order Search,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=orders.home,Format:,html/body/div[1]/div/form/table/tbody/tr[25]/td[1]/label,Orders
-Add Order,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=orders.addOrder,Process Credit Card Freight Charge:,.//*[@id='orderForm']/table/tbody/tr[13]/td/table/tbody/tr[7]/td[1],Orders
+Order Upload,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=upload.showForm,.//*[@id='uploadForm']/table[3]/tbody/tr[21]/td/b,Batch File Upload,Orders,http://dev.fortwarehouse.com:8950/index.cfm
+Order Upload -- Secured,https://dev.fortwarehouse.com/wsn_v2/index.cfm?fuseaction=upload.showForm,"//*[@id=""uploadForm""]/table[3]/tbody/tr[12]/td[1]",Check Address:,Orders,http://dev.fortwarehouse.com:8950/index.cfm
+Order Search,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=orders.home,html/body/div[1]/div/form/table/tbody/tr[25]/td[1]/label,Format:,Orders,http://dev.fortwarehouse.com:8950/index.cfm
+Add Order,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=orders.addOrder,.//*[@id='orderForm']/table/tbody/tr[13]/td/table/tbody/tr[7]/td[1],Process Credit Card Freight Charge:,Orders,http://dev.fortwarehouse.com:8950/index.cfm
+Shipping,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=shipping11.home,.//*[@id='Shipping_Search_Form']/table/tbody/tr[18]/td[1]/label,System Order ID:,Orders,http://dev.fortwarehouse.com:8950/index.cfm
+Product Search,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=products.home,html/body/div[1]/div/form/table/tbody/tr[20]/td[1]/label,Show Alternate Product Name,Products,http://dev.fortwarehouse.com:8950/index.cfm
+Product Add,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=products.form,html/body/div[1]/div/form/table/tbody/tr[18]/td[1]/label,Appellation:,Products,http://dev.fortwarehouse.com:8950/index.cfm
+Product 303 Import,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=products.productImportForm303,html/body/div[1]/div/form/table/tbody/tr[3]/td[1],Excel File:,Products,http://dev.fortwarehouse.com:8950/index.cfm
+Product Import,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=products.importForm,html/body/div[1]/div/form/table/tbody/tr[6]/td[1],Excel File:,Products,http://dev.fortwarehouse.com:8950/index.cfm
+Product Report,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.productsForm,html/body/div[1]/div/table/tbody/tr[2]/td[1]/label,Customer:,Products,http://dev.fortwarehouse.com:8950/index.cfm
+Audit Trail,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=auditTrail.list,html/body/div[1]/div/table/tbody/tr[5]/td[2],                Export To Excel?:          ,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Carrier Shipment Report,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.carrierShipment,html/body/div[1]/div/form/table/tbody/tr[9]/td[1]/label,Export To Excel?:,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Customer Invoice,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.customerInvoice,html/body/div[1]/div/form/table/tbody/tr[9]/td[1]/label,Order Type:,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Email Returns,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.orderReturnsEmailForm,html/body/div[1]/div/form/table/tbody/tr[2]/td[1]/label,Customer:,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Gateway Package Report,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.gatewayPackage,html/body/div[1]/div/form/table/tbody/tr[2]/td[1]/label,Gateways:,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Inventory Fees Report,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.inventoryFees,html/body/div[1]/div/form/table/tbody/tr[2]/td[1]/label,From Date (MM/DD/YYYY):,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Inventory In and Out Report,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.inventoryInAndOutForm,html/body/div[1]/div/table/tbody/tr[4]/td/table/tbody/tr[1]/td[1],Kits,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Inventory Location Report,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.inventoryLocationForm,html/body/div[1]/div/table/tbody/tr[5]/td/table/tbody/tr[1]/td[1],Products,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Inventory Report,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.inventoryForm,html/body/div[1]/div/table/tbody/tr[4]/td/table/tbody/tr[1]/td[1],Kits,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Kits,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.kitsForm,html/body/div[1]/div/table/tbody/tr[3]/td[1]/label,Kit Type?:,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Manifest Shipment Report,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.manifestShipmentForm,html/body/div[1]/div/form/table/tbody/tr[4]/td[1]/label,Customer:,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Order Tracking,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.orderTrackingForm2,html/body/div[1]/div/form/table/tbody/tr[4]/td[1]/label,Upload Date (MM/DD/YYYY):,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Order Tracking by Client,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.orderTrackingForm,html/body/div[1]/div/form/table/tbody/tr[10]/td[1]/label,Shipment Date:,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Orders,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.orderForm,html/body/div[1]/div/form/table/tbody/tr[27]/td[1]/label,Bottle Volume:,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Package Analysis Report,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=reports.orderAnalysisForm,html/body/div[1]/div/form/table/tbody/tr[10]/td[1]/label,Company:,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Pick Sheet,,,,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Products,,,,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Rates Schedule,,,,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Restock Quantity,,,,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Returns,,,,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+State Logistics,,,,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+State Shipment,,,,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Transaction Report,,,,Reports,http://dev.fortwarehouse.com:8950/index.cfm
+Unscanned Tracking Number Report,,,,Reports,http://dev.fortwarehouse.com:8950/index.cfm

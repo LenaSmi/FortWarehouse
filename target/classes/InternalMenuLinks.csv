@@ -1,4 +1,5 @@
-Order Upload,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=upload.showForm,Batch File Upload,.//*[@id='uploadForm']/table[3]/tbody/tr[21]/td/b,Orders
-Order Upload -- Secured,https://dev.fortwarehouse.com/wsn_v2/index.cfm?fuseaction=upload.showForm,Batch File Upload,.//*[@id='uploadForm']/table[3]/tbody/tr[21]/td/b,Orders
-Order Search,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=orders.home,Format:,html/body/div[1]/div/form/table/tbody/tr[25]/td[1]/label,Orders
-Add Order,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=orders.addOrder,Process Credit Card Freight Charge:,.//*[@id='orderForm']/table/tbody/tr[13]/td/table/tbody/tr[7]/td[1],Orders
+Order Upload,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=upload.showForm,.//*[@id='uploadForm']/table[3]/tbody/tr[21]/td/b,Batch File Upload,Orders,http://dev.fortwarehouse.com:8950/index.cfm
+Order Upload -- Secured,https://dev.fortwarehouse.com/wsn_v2/index.cfm?fuseaction=upload.showForm,"//*[@id=""uploadForm""]/table[3]/tbody/tr[12]/td[1]",Check Address:,Orders,http://dev.fortwarehouse.com:8950/index.cfm
+Order Search,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=orders.home,html/body/div[1]/div/form/table/tbody/tr[25]/td[1]/label,Format:,Orders,http://dev.fortwarehouse.com:8950/index.cfm
+Add Order,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=orders.addOrder,.//*[@id='orderForm']/table/tbody/tr[13]/td/table/tbody/tr[7]/td[1],Process Credit Card Freight Charge:,Orders,http://dev.fortwarehouse.com:8950/index.cfm
+Shipping,http://dev.fortwarehouse.com:8950/wsn_v2/index.cfm?fuseaction=shipping11.home,.//*[@id='Shipping_Search_Form']/table/tbody/tr[18]/td[1]/label,System Order ID:,Orders,http://dev.fortwarehouse.com:8950/index.cfm
