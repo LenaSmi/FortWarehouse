@@ -24,12 +24,12 @@ public class HomePage {
 		
 	}
 	
-	public void verifyLinkOpenSameTab(WebDriver driver, String linkText, String expectedUrl,
+	public void verifyLinkOpenSameTab(WebDriver driver, String xpathSelector, String expectedUrl,
 		String expectedText, String menueItem,String xpathToVerify){
 		
 		Actions action = new Actions(driver);
 		action.moveToElement(driver.findElement(By.linkText(menueItem))).perform();
-		driver.findElement(By.linkText(linkText)).click();
+		driver.findElement(By.xpath(xpathSelector)).click();
 		assertEquals(expectedUrl, driver.getCurrentUrl());
 		
 		

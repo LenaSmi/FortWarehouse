@@ -51,6 +51,14 @@
         			<systemPropertyVariables>
             		<webdriver.chrome.driver>${webdriver.chrome}</webdriver.chrome.driver>
         			</systemPropertyVariables>
+        			<archive>
+						<manifest>
+							<mainClass>core.HomePageTest</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
     			</configuration>
 			</plugin>
 		</plugins>

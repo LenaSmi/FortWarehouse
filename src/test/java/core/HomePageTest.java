@@ -27,6 +27,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -56,7 +57,7 @@ public class HomePageTest {
 	@Before
 	public void setUp() throws Exception {
 		driver.get(baseUrl);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		elem.login(userName, password, driver, textExpectedAfterLogin, expectedUrlAfterLogin);
 	}
 
@@ -66,7 +67,7 @@ public class HomePageTest {
 	}
 
 	// Test verifies that external links on the Home page redirects to external sites
-	//@Ignore
+	@Ignore
 	@Test
 	public void test_02_0001() throws IOException {
 		String csvFile = "./src/main/resources/ExternalLinks.csv";
@@ -105,26 +106,28 @@ public class HomePageTest {
 		String line = null;
 		String cvsSplitBy = ",";
 		String url = null;
-		String linkText = null;
+		String xpathSelector = null;
 		String expectedText = null;
 		String menueItem = null;
 		String xpathToVerify = null;
 		String homeUrl = null;
+		String linkText = null;
  
 		br = new BufferedReader(new FileReader(csvFile));
 		
 		while ((line = br.readLine()) != null) {
 			 
 			String[] csv = line.split(cvsSplitBy);
- 
-			linkText = csv[0];
-			url = csv[1];
-			xpathToVerify = csv[2];
-			expectedText = csv[3];
-			menueItem = csv[4];
-			homeUrl = csv[5];
 			
-			home.verifyLinkOpenSameTab(driver, linkText, url, expectedText, menueItem, xpathToVerify);
+			linkText = csv[0];
+			xpathSelector = csv[1];
+			url = csv[2];
+			xpathToVerify = csv[3];
+			expectedText = csv[4];
+			menueItem = csv[5];
+			homeUrl = csv[6];
+			
+			home.verifyLinkOpenSameTab(driver, xpathSelector, url, expectedText, menueItem, xpathToVerify);
 			
 			//take a screenshot
 			scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
@@ -145,6 +148,8 @@ public class HomePageTest {
 			driver.get(homeUrl);
 		}
 		br.close();
+		
+		
 	}
 	
 	
