@@ -19,5 +19,6 @@ public class BasePage {
 		assertEquals(url, driver.getCurrentUrl());
 		assertEquals(expectedText, driver.findElement(By.xpath(".//*[@id='datepicker']/div/div[1]/div")).getText());
 	}
+	
 
 }
