@@ -97,11 +97,11 @@ function toggleDisplay(elementId) {
 <th>Time</th></tr>
 <tr class="b">
 <td>5</td>
-<td>0</td>
+<td>1</td>
 <td>0</td>
 <td>1</td>
-<td>80%</td>
-<td>136.409</td></tr></table><br />
+<td>60%</td>
+<td>146.215</td></tr></table><br />
 <p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p><br /></div>
 <div class="section">
 <h2>Package List<a name="Package_List"></a></h2><a name="Package_List"></a>
@@ -118,11 +118,11 @@ function toggleDisplay(elementId) {
 <tr class="b">
 <td><a href="#core">core</a></td>
 <td>5</td>
-<td>0</td>
+<td>1</td>
 <td>0</td>
 <td>1</td>
-<td>80%</td>
-<td>136.409</td></tr></table><br />
+<td>60%</td>
+<td>146.215</td></tr></table><br />
 <p>Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.</p>
 <div class="section">
 <h3>core<a name="core"></a></h3><a name="core"></a>
@@ -137,14 +137,14 @@ function toggleDisplay(elementId) {
 <th>Success Rate</th>
 <th>Time</th></tr>
 <tr class="b">
-<td><a href="#coreHomePageTest"><img src="images/icon_warning_sml.gif" alt="" /></a></td>
+<td><a href="#coreHomePageTest"><img src="images/icon_error_sml.gif" alt="" /></a></td>
 <td><a href="#coreHomePageTest">HomePageTest</a></td>
 <td>2</td>
-<td>0</td>
+<td>1</td>
 <td>0</td>
 <td>1</td>
-<td>50%</td>
-<td>126.059</td></tr>
+<td>0%</td>
+<td>136.495</td></tr>
 <tr class="a">
 <td><a href="#coreLoginPageTest"><img src="images/icon_success_sml.gif" alt="" /></a></td>
 <td><a href="#coreLoginPageTest">LoginPageTest</a></td>
@@ -153,7 +153,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>10.35</td></tr></table></div><br /></div>
+<td>9.72</td></tr></table></div><br /></div>
 <div class="section">
 <h2>Test Cases<a name="Test_Cases"></a></h2><a name="Test_Cases"></a>
 <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p>
@@ -164,30 +164,42 @@ function toggleDisplay(elementId) {
 <td><a href="#core.HomePageTest.test_02_0001"><img src="images/icon_warning_sml.gif" alt="" /></a></td>
 <td><a href="#core.HomePageTest.test_02_0001">test_02_0001</a>
 <div class="detailToggle" style="display:inline"><a href="javascript:toggleDisplay(&apos;core_HomePageTest_test_02_0001&apos;);"><span style="display:inline;" id="core_HomePageTest_test_02_0001off"> + </span><span style="display:none;" id="core_HomePageTest_test_02_0001on"> - </span>[ Detail ]</a></div></td>
-<td>0.069</td></tr>
+<td>0.064</td></tr>
 <tr class="b">
 <td></td>
 <td>skipped</td>
 <td></td></tr>
 <tr class="a">
-<td><img src="images/icon_success_sml.gif" alt="" /></td>
-<td>test_02_0002</td>
-<td>125.99</td></tr></table></div>
+<td><a href="#core.HomePageTest.test_02_0002"><img src="images/icon_error_sml.gif" alt="" /></a></td>
+<td><a href="#core.HomePageTest.test_02_0002">test_02_0002</a>
+<div class="detailToggle" style="display:inline"><a href="javascript:toggleDisplay(&apos;core_HomePageTest_test_02_0002&apos;);"><span style="display:inline;" id="core_HomePageTest_test_02_0002off"> + </span><span style="display:none;" id="core_HomePageTest_test_02_0002on"> - </span>[ Detail ]</a></div></td>
+<td>136.431</td></tr>
+<tr class="b">
+<td></td>
+<td>Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;.//*[@id='uploadForm']/table[3]/tbody/tr[17]/td&quot;} Command duration or timeout: 20.10 seconds For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html Build info: version: '2.42.2', revision: '6a6995d31c7c56c340d6f45a76976d43506cd6cc', time: '2014-06-03 10:52:47' System info: host: 'AcerWindows8', ip: '10.1.1.122', os.name: 'Windows 8', os.arch: 'x86', os.version: '6.2', java.version: '1.7.0_51' Session ID: eae4a638-52a9-4e4c-8da5-79db4b2a78f8 Driver info: org.openqa.selenium.firefox.FirefoxDriver Capabilities [{platform=XP, databaseEnabled=true, cssSelectorsEnabled=true, javascriptEnabled=true, acceptSslCerts=true, handlesAlerts=true, browserName=firefox, webStorageEnabled=true, nativeEvents=false, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=31.0}]</td>
+<td></td></tr>
+<tr class="a">
+<td></td>
+<td>
+<div id="core_HomePageTest_test_02_0002error" style="display:none;">
+<div>
+<pre>org.openqa.selenium.NoSuchElementException: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;.//*[@id='uploadForm']/table[3]/tbody/tr[17]/td&quot;}Command duration or timeout: 20.10 secondsFor documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.htmlBuild info: version: '2.42.2', revision: '6a6995d31c7c56c340d6f45a76976d43506cd6cc', time: '2014-06-03 10:52:47'System info: host: 'AcerWindows8', ip: '10.1.1.122', os.name: 'Windows 8', os.arch: 'x86', os.version: '6.2', java.version: '1.7.0_51'Session ID: eae4a638-52a9-4e4c-8da5-79db4b2a78f8Driver info: org.openqa.selenium.firefox.FirefoxDriverCapabilities [{platform=XP, databaseEnabled=true, cssSelectorsEnabled=true, javascriptEnabled=true, acceptSslCerts=true, handlesAlerts=true, browserName=firefox, webStorageEnabled=true, nativeEvents=false, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=31.0}]at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)at java.lang.reflect.Constructor.newInstance(Unknown Source)at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:204)at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:156)at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:599)at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:352)at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:449)at org.openqa.selenium.By$ByXPath.findElement(By.java:357)at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:344)at core.HomePageTest.test_02_0002(HomePageTest.java:140)</pre></div></div></td>
+<td></td></tr></table></div>
 <div class="section">
 <h3>LoginPageTest<a name="LoginPageTest"></a></h3><a name="coreLoginPageTest"></a>
 <table border="1" class="bodyTable">
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" alt="" /></td>
 <td>test_01_0001</td>
-<td>4.137</td></tr>
+<td>3.679</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" alt="" /></td>
 <td>test_01_0002</td>
-<td>3.519</td></tr>
+<td>3.496</td></tr>
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" alt="" /></td>
 <td>test_01_0003</td>
-<td>2.694</td></tr></table></div><br /></div>
+<td>2.545</td></tr></table></div><br /></div>
 <div class="section">
 <h2>Failure Details<a name="Failure_Details"></a></h2><a name="Failure_Details"></a>
 <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><br />
@@ -197,7 +209,17 @@ function toggleDisplay(elementId) {
 <td><a name="core.HomePageTest.test_02_0001"></a>test_02_0001</td></tr>
 <tr class="b">
 <td></td>
-<td>skipped: skipped</td></tr></table><br /></div>
+<td>skipped: skipped</td></tr>
+<tr class="a">
+<td><img src="images/icon_error_sml.gif" alt="" /></td>
+<td><a name="core.HomePageTest.test_02_0002"></a>test_02_0002</td></tr>
+<tr class="b">
+<td></td>
+<td>org.openqa.selenium.NoSuchElementException: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;.//*[@id='uploadForm']/table[3]/tbody/tr[17]/td&quot;} Command duration or timeout: 20.10 seconds For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html Build info: version: '2.42.2', revision: '6a6995d31c7c56c340d6f45a76976d43506cd6cc', time: '2014-06-03 10:52:47' System info: host: 'AcerWindows8', ip: '10.1.1.122', os.name: 'Windows 8', os.arch: 'x86', os.version: '6.2', java.version: '1.7.0_51' Session ID: eae4a638-52a9-4e4c-8da5-79db4b2a78f8 Driver info: org.openqa.selenium.firefox.FirefoxDriver Capabilities [{platform=XP, databaseEnabled=true, cssSelectorsEnabled=true, javascriptEnabled=true, acceptSslCerts=true, handlesAlerts=true, browserName=firefox, webStorageEnabled=true, nativeEvents=false, rotatable=false, locationContextEnabled=true, applicationCacheEnabled=true, takesScreenshot=true, version=31.0}]</td></tr>                                                                            
+<tr class="a">
+<td></td>
+<td>
+<div id="test_02_0002error">core.HomePageTest:140</div></td></tr></table><br /></div>
       </div>
     </div>
     <div class="clear">
