@@ -1,10 +1,9 @@
 package core;
 
-import static org.junit.Assert.*;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -22,6 +21,9 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
+import org.junit.rules.TestRule;
+import org.junit.runner.Description;
+import org.junit.runners.model.Statement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -36,11 +38,13 @@ import static org.hamcrest.Matchers.*;
 public class HomePageTest {
 	
 	WebDriver driver = new FirefoxDriver();
-	private String baseUrl = "http://dev.fortwarehouse.com:8950/login/login.cfm";
+	private String baseUrl = "http://dev.fortwarehouse.com:8950";
+	//private String baseUrl = "http://www.fortwarehouse.com/";
 	LoginPage elem = new LoginPage();
 	HomePage home = new HomePage();
 	
-	private String expectedUrlAfterLogin = "http://dev.fortwarehouse.com:8950/index.cfm";
+	private String expectedUrlAfterLogin = "http://dev.fortwarehouse.com:8950";
+	//private String expectedUrlAfterLogin = "https://www.fortwarehouse.com";
 	private String textExpectedAfterLogin = "fortwh qa (FORT Warehouse Demo)";
 	private String userName = "fortwh";
 	private String password = "fortqa333";
@@ -52,13 +56,14 @@ public class HomePageTest {
 	
 	@Rule
     public ErrorCollector collector = new ErrorCollector();
+	public ScreenshotRule screenshotTestRule = new ScreenshotRule();
 	
 
 	@Before
 	public void setUp() throws Exception {
-		driver.get(baseUrl);
+		driver.get(baseUrl + "/login/login.cfm");
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		elem.login(userName, password, driver, textExpectedAfterLogin, expectedUrlAfterLogin);
+		elem.login(userName, password, driver, textExpectedAfterLogin, expectedUrlAfterLogin + "/index.cfm");
 	}
 
 	@After
@@ -129,11 +134,11 @@ public class HomePageTest {
 			
 			home.verifyLinkOpenSameTab(driver, xpathSelector, url, expectedText, menueItem, xpathToVerify);
 			
-			//take a screenshot
-			scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-			
-			//copy screenshot to c:\tmp\
-			FileUtils.copyFile(scrFile, new File("c:\\tmp\\screenshot" + newDate + linkText + ".png"));
+//			//take a screenshot
+//			scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+//			
+//			//copy screenshot to c:\tmp\
+//			FileUtils.copyFile(scrFile, new File("c:\\tmp\\screenshot" + newDate + linkText + ".png"));
 			
 			
 			try{
@@ -149,12 +154,38 @@ public class HomePageTest {
 		}
 		br.close();
 		
-		
 	}
 	
-	
-	
-	
-	
+	private class ScreenshotRule implements TestRule {
+
+	      @Override
+	      public Statement apply(final Statement base, final Description description) {
+	          return new Statement() {
+
+	              @Override
+	              public void evaluate() throws Throwable {
+	                  try {
+	                      base.evaluate();
+	                  } catch (Throwable t) {
+	                      captureScreenshot(description.getMethodName().toString());
+	                      throw t;
+	                  }
+	              }
+	              
+	          };
+	      }
+	      
+	        private void captureScreenshot(String fileName) {
+	            try {
+	                new File("target/surefire-reports/").mkdirs();
+	                FileOutputStream out = new FileOutputStream("target/surefire-reports/screenshot-" + newDate +
+	                		fileName + ".png");
+	                out.write(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
+	                out.close();
+	            } catch (Exception e) {
+	            }
+	        }
+	      
+	    }
 
 }
