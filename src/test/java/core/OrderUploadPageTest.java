@@ -19,7 +19,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class OrderUploadPageTest {
 	
 	WebDriver driver = new FirefoxDriver();
-	private String baseUrl = "http://dev.fortwarehouse.com:8950/login/login.cfm";
+	private String baseUrl = "http://dev.fortwarehouse.com:8950";
 	//private String baseUrl = "http://www.fortwarehouse.com/";
 	LoginPage elem = new LoginPage();
 	HomePage home = new HomePage();
@@ -34,7 +34,7 @@ public class OrderUploadPageTest {
 
 	@Before
 	public void setUp() throws Exception {
-		driver.get(baseUrl);
+		driver.get(baseUrl + "/login/login.cfm");
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		elem.login(userName, password, driver, textExpectedAfterLogin, expectedUrlAfterLogin);
 	}

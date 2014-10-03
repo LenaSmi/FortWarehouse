@@ -10,14 +10,16 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+@FixMethodOrder
 public class OrderSearchPageTest {
 	
 	WebDriver driver = new FirefoxDriver();
-	private String baseUrl = "http://dev.fortwarehouse.com:8950/login/login.cfm";
+	private String baseUrl = "http://dev.fortwarehouse.com:8950";
 	//private String baseUrl = "http://www.fortwarehouse.com/";
 	LoginPage elem = new LoginPage();
 	HomePage home = new HomePage();
@@ -30,7 +32,7 @@ public class OrderSearchPageTest {
 
 	@Before
 	public void setUp() throws Exception {
-		driver.get(baseUrl);
+		driver.get(baseUrl + "/login/login.cfm");
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		elem.login(userName, password, driver, textExpectedAfterLogin, expectedUrlAfterLogin);
 	}
@@ -44,27 +46,16 @@ public class OrderSearchPageTest {
 	//@Ignore
 	@Test
 	public void test_04_0001() throws FileNotFoundException, IOException {
-		String xpathSelector = null;
-		String url = null;
-		String textExpected = null;
-		String menuItem = null;
-		String xpathExpected = null;
+				
 		String orderNumber = null;
-		
-
 		Properties properties = new Properties();
-
-		properties.load(new FileInputStream("./src/main/resources/TestOrderSearch.properties"));
-
-		xpathSelector = properties.getProperty("xpathSelector");
-		url = properties.getProperty("url");
-		textExpected = properties.getProperty("textExpected");
-		menuItem = properties.getProperty("menuItem");
-		xpathExpected = properties.getProperty("xpathExpected");
+		properties.load(new FileInputStream("./src/main/resources/test_04_0001.properties"));
+			
 		orderNumber = properties.getProperty("orderNumber");
 				
-		home.verifyLinkOpenSameTab(driver, xpathSelector, url, textExpected, menuItem, xpathExpected);
-		assertTrue(orderSearch.singleOrderSearch(driver, orderNumber, seller));
+		home.verifyLinkOpenSameTab(driver, ".//*[@id='qm0']/div[1]/a[3]", baseUrl + "/wsn_v2/index.cfm?fuseaction=orders.home",
+				"Format:", "Orders", "html/body/div[1]/div/form/table/tbody/tr[25]/td[1]/label");
+		assertTrue(orderSearch.orderSearch(driver, orderNumber, seller));
 	}
 
 }

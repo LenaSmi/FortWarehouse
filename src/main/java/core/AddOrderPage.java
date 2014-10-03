@@ -14,11 +14,9 @@ import org.openqa.selenium.support.ui.Select;
 
 public class AddOrderPage {
 	
-	private DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-	private Date date = new Date();
-	private String orderNumber = dateFormat.format(date);
 	
-	public void addOrderManually(WebDriver driver, String sellerValue, String name, String lastName, String address1,
+	
+	public void addOrderManually(WebDriver driver,String orderNumber, String sellerValue, String name, String lastName, String address1,
 			String address2, String city, String state, String zip, String specialInstr, String deliveryInstr, String recipientMessage,
 			String productValue, String quantity){
 		
@@ -56,18 +54,30 @@ public class AddOrderPage {
 		select3.selectByValue(productValue);
 		
 		driver.findElement(By.id("Quantity_1")).clear();
+		
 		driver.findElement(By.id("Quantity_1")).sendKeys(quantity);
 		
 		driver.findElement(By.xpath(".//*[@id='orderForm']/table/tbody/tr[11]/td/table/tbody/tr[2]/td[10]/input")).click();
 		
 		driver.findElement(By.xpath(".//*[@id='orderForm']/table/tbody/tr[16]/td/table/tbody/tr/td[2]/input")).click();
-		//System.out.println(driver.findElement(By.id("Order_Number")).getAttribute("value"));
+				
+		assertEquals(driver.findElement(By.xpath("html/body/div[1]/div/a")).getText(), "Go to order");
 		
-		//assertEquals(driver.findElement(By.xpath("html/body/div[1]/div/a")).getText(), "Go to order");
+		
+		
+		
 		
 	}
 	
 	public void deleteOrder(WebDriver driver, String orderNumberToDelete){
+		
+		driver.findElement(By.name("BTN_DELETE")).click();
+		
+	}
+	
+	public void deleteOrder(WebDriver driver){
+		
+		driver.findElement(By.name("BTN_DELETE")).click();
 		
 	}
 

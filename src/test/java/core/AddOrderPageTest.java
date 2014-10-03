@@ -4,17 +4,26 @@ import static org.junit.Assert.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+@FixMethodOrder
 public class AddOrderPageTest {
 	
 	WebDriver driver = new FirefoxDriver();
@@ -23,10 +32,14 @@ public class AddOrderPageTest {
 	LoginPage elem = new LoginPage();
 	HomePage home = new HomePage();
 	AddOrderPage addOrder = new AddOrderPage();
+	OrderSearchPage search = new OrderSearchPage();
 	private String expectedUrlAfterLogin = "http://dev.fortwarehouse.com:8950/index.cfm";
 	private String textExpectedAfterLogin = "fortwh qa (FORT Warehouse Demo)";
 	private String userName = "fortwh";
 	private String password = "fortqa333";
+	private DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+	private Date date = new Date();
+	private String orderNumber = dateFormat.format(date);
 	
 
 	@Before
@@ -44,7 +57,7 @@ public class AddOrderPageTest {
 	// Test verifies that user can add single order manually 
 	//@Ignore
 	@Test
-	public void test_04_0001() throws FileNotFoundException, IOException{
+	public void test_05_0001() throws FileNotFoundException, IOException{
 		String xpathSelector = null;
 		String url = null;
 		String textExpected = null;
@@ -62,12 +75,14 @@ public class AddOrderPageTest {
 		String deliveryInstr = null;  
 		String recipientMessage = null;
 		String productValue = null;
-		String quantity =null;
+		String quantity = null;
+		String companyName = null;
+		
 		
 			
 		Properties properties = new Properties();
 
-		properties.load(new FileInputStream("./src/main/resources/test_04_0001.properties"));
+		properties.load(new FileInputStream("./src/main/resources/test_05_0001.properties"));
 
 		xpathSelector = properties.getProperty("xpathSelector1");
 		url = properties.getProperty("url1");
@@ -87,12 +102,57 @@ public class AddOrderPageTest {
 		recipientMessage = properties.getProperty("recipientMessage");
 		productValue = properties.getProperty("productValue");
 		quantity = properties.getProperty("quantity");
+		companyName = properties.getProperty("companyName");
+		
+		properties.setProperty("newOrderNumber", orderNumber);
+		
+		properties.store(new FileOutputStream("./src/main/resources/test_05_0002.properties"), null);
 		
 		home.verifyLinkOpenSameTab(driver, xpathSelector, url, textExpected, menuItem, xpathExpected);
-		addOrder.addOrderManually(driver, companyValue, name, lastName, address1, address2, city, state, zip, specialInstr, deliveryInstr,  
-				recipientMessage, productValue, quantity);
-		assertEquals(driver.findElement(By.xpath("html/body/div[1]/div/a")).getText(), "Go to order");
-	
+		addOrder.addOrderManually(driver, orderNumber, companyValue, name, lastName, address1, address2,
+				city, state, zip, specialInstr, deliveryInstr, recipientMessage, productValue, quantity);
+		home.verifyLinkOpenSameTab(driver, ".//*[@id='qm0']/div[1]/a[3]", baseUrl + "/wsn_v2/index.cfm?fuseaction=orders.home",
+				"Format:", "Orders", "html/body/div[1]/div/form/table/tbody/tr[25]/td[1]/label");
+		
+		assertTrue(search.orderSearch(driver, orderNumber, companyName));
+		
+				
 	}
+	
+	// Test verifies that user can delete an order from all seller's orders table
+	//@Ignore
+	@Test
+	public void test_05_0002() throws FileNotFoundException, IOException{
+		home.verifyLinkOpenSameTab(driver, ".//*[@id='qm0']/div[1]/a[3]", baseUrl + "/wsn_v2/index.cfm?fuseaction=orders.home",
+				"Format:", "Orders", "html/body/div[1]/div/form/table/tbody/tr[25]/td[1]/label");
+		
+		String companyName = null;
+		String newOrderNumber = null;
+		Properties properties = new Properties();
+		properties.load(new FileInputStream("./src/main/resources/test_05_0002.properties"));
+		companyName = properties.getProperty("companyName");
+		newOrderNumber = properties.getProperty("newOrderNumber");
+		
+		search.orderSearch(driver, "", companyName);
+		List<WebElement> list = driver
+				.findElements(By
+						.xpath("html/body/div[1]/div/form[1]/table[1]/tbody/tr[/*]/td[2]/input"));
+				
+		for (WebElement element1 : list) {
+			if(element1.getAttribute("value").matches(".*" + newOrderNumber + ".*")){
+				element1.click();
+				addOrder.deleteOrder(driver);
+				home.verifyLinkOpenSameTab(driver, ".//*[@id='qm0']/div[1]/a[3]", baseUrl + "/wsn_v2/index.cfm?fuseaction=orders.home",
+						"Format:", "Orders", "html/body/div[1]/div/form/table/tbody/tr[25]/td[1]/label");
+			    assertFalse(search.orderSearch(driver, newOrderNumber, companyName));
+			    
+				break;
+			}
+								
+		}
+
+	}
+	
+	
 
 }
