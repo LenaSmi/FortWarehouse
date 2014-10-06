@@ -72,7 +72,7 @@ public class HomePageTest {
 	}
 
 	// Test verifies that external links on the Home page redirects to external sites
-	@Ignore
+	//@Ignore
 	@Test
 	public void test_02_0001() throws IOException {
 		String csvFile = "./src/main/resources/ExternalLinks.csv";

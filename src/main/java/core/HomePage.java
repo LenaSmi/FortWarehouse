@@ -5,7 +5,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
@@ -30,6 +32,7 @@ public class HomePage {
 		Actions action = new Actions(driver);
 		action.moveToElement(driver.findElement(By.linkText(menueItem))).perform();
 		driver.findElement(By.xpath(xpathSelector)).click();
+				
 		assertEquals(expectedUrl, driver.getCurrentUrl());
 		
 		
