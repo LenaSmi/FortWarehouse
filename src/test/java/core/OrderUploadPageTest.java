@@ -24,7 +24,7 @@ public class OrderUploadPageTest {
 	LoginPage elem = new LoginPage();
 	HomePage home = new HomePage();
 	OrderUploadPage orderUpload = new OrderUploadPage();
-	private String expectedUrlAfterLogin = "http://dev.fortwarehouse.com:8950/index.cfm";
+	private String expectedUrlAfterLogin = baseUrl + "/index.cfm";
 	private String textExpectedAfterLogin = "fortwh qa (FORT Warehouse Demo)";
 	private String userName = "fortwh";
 	private String password = "fortqa333";
@@ -108,6 +108,38 @@ public class OrderUploadPageTest {
 		
 		}
 	
+	// Test verifies that user can't upload  orders from file with selected Seller, incorrect order format and other fields
+	// by default 
+	//@Ignore
+	@Test
+	public void test_03_0003() throws FileNotFoundException, IOException {
+		String xpathSelector = null;
+		String url = null;
+		String textExpected = null;
+		String menuItem = null;
+		String xpathExpected = null;
+		String orderDataCorrect = null;
+		String uploadFormat = null;
+
+		Properties properties = new Properties();
+
+		properties.load(new FileInputStream("./src/main/resources/OrderUploadPageTest.properties"));
+
+		xpathSelector = properties.getProperty("xpathSelector");
+		url = properties.getProperty("url");
+		textExpected = properties.getProperty("textExpected");
+		menuItem = properties.getProperty("menuItem");
+		xpathExpected = properties.getProperty("xpathExpected");
+		orderDataCorrect = properties.getProperty("orderDataIncorrect");
+		uploadFormat =properties.getProperty("uploadFormatIncorrect");
+
+			
+		home.verifyLinkOpenSameTab(driver, xpathSelector, url, textExpected, menuItem, xpathExpected);
+		orderUpload.singleOrderUpload(driver, seller,orderDataCorrect, uploadFormat);
+		assertEquals("1", driver.findElement(By.xpath("html/body/div[1]/div/table"
+				+ "[1]/tbody/tr[10]/td[2]")).getText());
+		
+		}
 	
 
 }

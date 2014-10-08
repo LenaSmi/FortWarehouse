@@ -38,12 +38,10 @@ public class OrderUploadPage {
 				
 	}
 	
-	public void multipleOrdersUpload(){
+	public void multipleOrdersUploadTabDelFile(WebDriver driver, String seller){
+		
+		
 		
 	}
-	
-	
-	
-	
 
 }

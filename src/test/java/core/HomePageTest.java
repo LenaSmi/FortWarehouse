@@ -31,39 +31,43 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class HomePageTest {
 	
-	WebDriver driver = new FirefoxDriver();
+	WebDriver driver1 = new FirefoxDriver();
+	EventFiringWebDriver driver = new EventFiringWebDriver(driver1);
+	private File scrFile;
+	
 	private String baseUrl = "http://dev.fortwarehouse.com:8950";
-	//private String baseUrl = "http://www.fortwarehouse.com/";
+	
 	LoginPage elem = new LoginPage();
 	HomePage home = new HomePage();
 	
-	private String expectedUrlAfterLogin = "http://dev.fortwarehouse.com:8950";
+	private String expectedUrlAfterLogin = baseUrl + "/index.cfm";
 	//private String expectedUrlAfterLogin = "https://www.fortwarehouse.com";
 	private String textExpectedAfterLogin = "fortwh qa (FORT Warehouse Demo)";
 	private String userName = "fortwh";
 	private String password = "fortqa333";
-	private File scrFile;
+	
 	private DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd HH mm ss");
 	private Date date = new Date();
 	private String newDate = dateFormat.format(date);
 	BasePage baseElement = new BasePage();
 	
 	@Rule
-    public ErrorCollector collector = new ErrorCollector();
-	public ScreenshotRule screenshotTestRule = new ScreenshotRule();
+    public  ErrorCollector collector = new ErrorCollector();
+	//public ScreenshotRule screenshotTestRule = new ScreenshotRule();
 	
 
 	@Before
 	public void setUp() throws Exception {
 		driver.get(baseUrl + "/login/login.cfm");
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		elem.login(userName, password, driver, textExpectedAfterLogin, expectedUrlAfterLogin + "/index.cfm");
+		elem.login(userName, password, driver, textExpectedAfterLogin, expectedUrlAfterLogin);
 	}
 
 	@After
@@ -72,7 +76,7 @@ public class HomePageTest {
 	}
 
 	// Test verifies that external links on the Home page redirects to external sites
-	//@Ignore
+	@Ignore
 	@Test
 	public void test_02_0001() throws IOException {
 		String csvFile = "./src/main/resources/ExternalLinks.csv";
@@ -96,8 +100,9 @@ public class HomePageTest {
 			catch (Throwable t){
 				collector.addError(t);
 				
+				
 			}
-			//home.verifyLinkOpenNewTab(driver, xpathToLink, url);
+			
 		}
 		br.close();
 	}
@@ -115,7 +120,6 @@ public class HomePageTest {
 		String expectedText = null;
 		String menueItem = null;
 		String xpathToVerify = null;
-		String homeUrl = null;
 		String linkText = null;
  
 		br = new BufferedReader(new FileReader(csvFile));
@@ -130,62 +134,24 @@ public class HomePageTest {
 			xpathToVerify = csv[3];
 			expectedText = csv[4];
 			menueItem = csv[5];
-			homeUrl = csv[6];
-			
-			home.verifyLinkOpenSameTab(driver, xpathSelector, url, expectedText, menueItem, xpathToVerify);
-			
-//			//take a screenshot
-//			scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-//			
-//			//copy screenshot to c:\tmp\
-//			FileUtils.copyFile(scrFile, new File("c:\\tmp\\screenshot" + newDate + linkText + ".png"));
-			
 			
 			try{
+				home.verifyLinkOpenSameTab(driver, xpathSelector, baseUrl + url, expectedText, menueItem, xpathToVerify);
 				assertThat(linkText, driver.findElement(By.xpath(xpathToVerify)).getText(), is(expectedText));
+				
 			}
 			catch (Throwable t){
+				scrFile = driver.getScreenshotAs(OutputType.FILE);
+				FileUtils.copyFile(scrFile, new File("c:\\tmp\\screenshot" + newDate + linkText + ".png"));
 				collector.addError(t);
-				
+								
 			}
 			
 		
-			driver.get(homeUrl);
+			driver.get(expectedUrlAfterLogin);
 		}
 		br.close();
 		
 	}
 	
-	private class ScreenshotRule implements TestRule {
-
-	      @Override
-	      public Statement apply(final Statement base, final Description description) {
-	          return new Statement() {
-
-	              @Override
-	              public void evaluate() throws Throwable {
-	                  try {
-	                      base.evaluate();
-	                  } catch (Throwable t) {
-	                      captureScreenshot(description.getMethodName().toString());
-	                      throw t;
-	                  }
-	              }
-	              
-	          };
-	      }
-	      
-	        private void captureScreenshot(String fileName) {
-	            try {
-	                new File("target/surefire-reports/").mkdirs();
-	                FileOutputStream out = new FileOutputStream("target/surefire-reports/screenshot-" + newDate +
-	                		fileName + ".png");
-	                out.write(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
-	                out.close();
-	            } catch (Exception e) {
-	            }
-	        }
-	      
-	    }
-
 }

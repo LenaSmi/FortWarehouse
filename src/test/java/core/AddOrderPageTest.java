@@ -33,7 +33,7 @@ public class AddOrderPageTest {
 	HomePage home = new HomePage();
 	AddOrderPage addOrder = new AddOrderPage();
 	OrderSearchPage search = new OrderSearchPage();
-	private String expectedUrlAfterLogin = "http://dev.fortwarehouse.com:8950/index.cfm";
+	private String expectedUrlAfterLogin = baseUrl + "/index.cfm";
 	private String textExpectedAfterLogin = "fortwh qa (FORT Warehouse Demo)";
 	private String userName = "fortwh";
 	private String password = "fortqa333";

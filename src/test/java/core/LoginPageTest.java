@@ -12,8 +12,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class LoginPageTest {
 	
 	WebDriver driver = new FirefoxDriver();
-	private String baseUrl = "http://dev.fortwarehouse.com:8950/login/login.cfm";
-	private String expectedUrlAfterLogin = "http://dev.fortwarehouse.com:8950/index.cfm";
+	private String baseUrl = "http://dev.fortwarehouse.com:8950";
+	private String expectedUrlAfterLogin = baseUrl + "/index.cfm";
 	private String userName = "fortwh";
 	private String password = "fortqa333";
 	private String textExpectedAfterLogin = "fortwh qa (FORT Warehouse Demo)";
@@ -25,7 +25,7 @@ public class LoginPageTest {
 
 	@Before
 	public void setUp() throws Exception {
-		driver.get(baseUrl);
+		driver.get(baseUrl + "/login/login.cfm");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 	}
