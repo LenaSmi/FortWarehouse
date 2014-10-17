@@ -30,7 +30,7 @@ public class OrderSearchPage {
 			
 	     }   // try 
 	     catch (NoAlertPresentException Ex){ 
-	    	 
+	    	 System.out.println("Alert is not presented here!");
 	     }   // catch 
 		
 		List<WebElement> list = driver
