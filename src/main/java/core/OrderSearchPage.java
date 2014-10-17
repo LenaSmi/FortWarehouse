@@ -1,7 +1,5 @@
 package core;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class OrderSearchPage {
 	
+	/** That function searches for an order by number and company in Orders/Order Search. Returns True if order is found **/
 	public boolean orderSearch(WebDriver driver,String orderNumber, String seller){
 		
 		
@@ -28,9 +27,10 @@ public class OrderSearchPage {
 		
 		try { 
 			alt.dismiss();
+			
 	     }   // try 
 	     catch (NoAlertPresentException Ex){ 
-	    	
+	    	 
 	     }   // catch 
 		
 		List<WebElement> list = driver

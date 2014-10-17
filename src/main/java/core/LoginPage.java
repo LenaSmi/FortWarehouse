@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
 	
-	
+	/** The method logs in with valid credentials **/
 	public void login(String userName, String password, WebDriver driver, String textExpected, String expectedUrl){
 		driver.findElement(By.id("UserName")).clear();
 		driver.findElement(By.id("UserName")).sendKeys(userName);
@@ -24,6 +24,7 @@ public class LoginPage {
 		
 	}
 	
+	/** The method logs in with invalid credentials and verifies error message is displayed **/
 	public void ivalidLogin(String userName, String password, WebDriver driver, String errorMessageExpectedInvalidLogin){
 		driver.findElement(By.id("UserName")).clear();
 		driver.findElement(By.id("UserName")).sendKeys(userName);

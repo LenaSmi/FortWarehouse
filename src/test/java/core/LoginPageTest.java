@@ -54,7 +54,8 @@ public class LoginPageTest {
 	//@Ignore
 	@Test
 	public void test_01_0003() {
-		base.logout(driver, baseUrl, textExpectedAfterLogout);
+		elem.login(userName, password, driver, textExpectedAfterLogin, expectedUrlAfterLogin);
+		base.logout(driver, baseUrl + "/login/login.cfm", textExpectedAfterLogout);
 	}
 
 }
