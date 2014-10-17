@@ -13,13 +13,12 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.openqa.selenium.OutputType;
@@ -34,7 +33,7 @@ public class OrderSearchPageTest {
 	
 		
 	
-	static WebDriver driver = new FirefoxDriver();
+	WebDriver driver = new FirefoxDriver();
 	
 	private String baseUrl = "http://dev.fortwarehouse.com:8950";
 	//private String baseUrl = "http://www.fortwarehouse.com/";
@@ -47,28 +46,10 @@ public class OrderSearchPageTest {
 	private String password = "fortqa333";
 	private String seller = "Moscow";
 	
-	private DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd HH mm ss");
-	private Date date = new Date();
-	private String newDate = dateFormat.format(date);
+	//private DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd HH mm ss");
+	//private Date date = new Date();
+	//private String newDate = dateFormat.format(date);
 	
-	@Rule
-	public TestWatcher watcher = new TestWatcher() {
-
-	    @Override
-	    protected void failed(Throwable e, Description description) {
-	        File scrFile = ((TakesScreenshot) driver)
-	                .getScreenshotAs(OutputType.FILE);
-	        try {
-	            FileUtils.copyFile(scrFile, new File(
-	                    "c:\\tmp\\screenshot" + newDate + ".png"));
-	        } catch (IOException e1) {
-	            
-	        }
-
-	    }
-	    
-	};
-
 	@Before
 	public void setUp() throws Exception {
 		driver.get(baseUrl + "/login/login.cfm");
@@ -76,18 +57,16 @@ public class OrderSearchPageTest {
 		elem.login(userName, password, driver, textExpectedAfterLogin, expectedUrlAfterLogin);
 	}
 
-	@AfterClass
-	public static void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		driver.quit();
 	}
 
-	// Test verifies that user can find an order by order number 
+	// Test verifies that user can find an order by order number when order exists
 	//@Ignore
 	@Test
 	public void test_04_0001() throws FileNotFoundException, IOException {
-		
-		
-				
+						
 		String orderNumber = null;
 		Properties properties = new Properties();
 		properties.load(new FileInputStream("./src/main/resources/test_04_0001.properties"));
@@ -99,6 +78,24 @@ public class OrderSearchPageTest {
 		
 		assertTrue("Order was not found",orderSearch.orderSearch(driver, orderNumber, seller));
 				
+		
+	}
+	
+	// Test verifies that user can't find an order by order number when order doesn't exist
+	//@Ignore
+	@Test
+	public void test_04_0002() throws FileNotFoundException, IOException {
+	
+		String orderNumber = null;
+		Properties properties = new Properties();
+		properties.load(new FileInputStream("./src/main/resources/test_04_0002.properties"));
+		
+		orderNumber = properties.getProperty("orderNumber");
+		
+		home.verifyLinkOpenSameTab(driver, ".//*[@id='qm0']/div[1]/a[3]", baseUrl + "/wsn_v2/index.cfm?fuseaction=orders.home",
+				"Format:", "Orders", "html/body/div[1]/div/form/table/tbody/tr[25]/td[1]/label");
+		
+		assertFalse("Order was not found",orderSearch.orderSearch(driver, orderNumber, seller));
 		
 	}
 	

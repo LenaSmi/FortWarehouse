@@ -60,7 +60,7 @@ public class HomePageTest {
 	
 	@Rule
     public  ErrorCollector collector = new ErrorCollector();
-	//public ScreenshotRule screenshotTestRule = new ScreenshotRule();
+	
 	
 
 	@Before
@@ -76,7 +76,7 @@ public class HomePageTest {
 	}
 
 	// Test verifies that external links on the Home page redirects to external sites
-	@Ignore
+	//@Ignore
 	@Test
 	public void test_02_0001() throws IOException {
 		String csvFile = "./src/main/resources/ExternalLinks.csv";
@@ -108,7 +108,7 @@ public class HomePageTest {
 	}
 	
 	// Test verifies that internal menu links redirect to right page
-	// @Ignore
+	//@Ignore
 	@Test
 	public void test_02_0002() throws IOException {
 		String csvFile = "./src/main/resources/InternalMenuLinks.csv";
