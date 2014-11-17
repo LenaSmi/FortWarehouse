@@ -2,6 +2,7 @@ package core;
 
 import static org.junit.Assert.*;
 
+import java.awt.AWTException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,7 +47,7 @@ public class OrderUploadPageTest {
 	@Before
 	public void setUp() throws Exception {
 		driver.get(baseUrl + "/login/login.cfm");
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		elem.login(userName, password, driver, textExpectedAfterLogin, expectedUrlAfterLogin);
 	}
 
@@ -120,43 +121,49 @@ public class OrderUploadPageTest {
 			
 		home.verifyLinkOpenSameTab(driver, xpathSelector, url, textExpected, menuItem, xpathExpected);
 		orderUpload.singleOrderUpload(driver, seller,orderDataCorrect, uploadFormat);
+		
+		//take a screenshot
+		scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		//copy screenshot to c:\tmp\
+		FileUtils.copyFile(scrFile, new File("c:\\tmp\\screenshot" + newDate + ".png"));
 		assertEquals("Download Invalid Orders", driver.findElement(By.xpath("html/body/div[1]/div/table"
 				+ "[1]/tbody/tr[10]/td[2]")).getText());
 		
 		}
 	
-	// Test verifies that user can't upload  orders from file with selected Seller, incorrect order format and other fields
+	// Test verifies that user can upload  orders from file with selected Seller, correct order format and other fields
 	// by default 
-	@Ignore
+	//@Ignore
 	@Test
-	public void test_03_0003() throws FileNotFoundException, IOException {
-//		String xpathSelector = null;
-//		String url = null;
-//		String textExpected = null;
-//		String menuItem = null;
-//		String xpathExpected = null;
-//		String orderDataCorrect = null;
-//		String uploadFormat = null;
-//
-//		Properties properties = new Properties();
-//
-//		properties.load(new FileInputStream("./src/main/resources/OrderUploadPageTest.properties"));
-//
-//		xpathSelector = properties.getProperty("xpathSelector");
-//		url = properties.getProperty("url");
-//		textExpected = properties.getProperty("textExpected");
-//		menuItem = properties.getProperty("menuItem");
-//		xpathExpected = properties.getProperty("xpathExpected");
-//		orderDataCorrect = properties.getProperty("orderDataIncorrect");
-//		uploadFormat =properties.getProperty("uploadFormatIncorrect");
-//
-//			
-//		home.verifyLinkOpenSameTab(driver, xpathSelector, url, textExpected, menuItem, xpathExpected);
-//		orderUpload.singleOrderUpload(driver, seller,orderDataCorrect, uploadFormat);
-//		assertEquals("1", driver.findElement(By.xpath("html/body/div[1]/div/table"
-//				+ "[1]/tbody/tr[10]/td[2]")).getText());
-		
-		}
-	
+	public void test_03_0003() throws FileNotFoundException, IOException, InterruptedException, AWTException {
+		String xpathSelector = null;
+		String url = null;
+		String textExpected = null;
+		String menuItem = null;
+		String xpathExpected = null;
+		String uploadFormat = null;
+		String pathToFile = null;
+
+		Properties properties = new Properties();
+
+		properties.load(new FileInputStream("./src/main/resources/OrderUploadPageTest.properties"));
+
+		xpathSelector = properties.getProperty("xpathSelector");
+		url = properties.getProperty("url");
+		textExpected = properties.getProperty("textExpected");
+		menuItem = properties.getProperty("menuItem");
+		xpathExpected = properties.getProperty("xpathExpected");
+		uploadFormat = properties.getProperty("uploadFormat");
+		pathToFile = properties.getProperty("pathToFile");
+
+			
+		home.verifyLinkOpenSameTab(driver, xpathSelector, url, textExpected, menuItem, xpathExpected);
+		orderUpload.multipleOrdersUploadTabDelFile(driver, seller, uploadFormat, pathToFile);
+		//take a screenshot
+		scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		//copy screenshot to c:\tmp\
+		FileUtils.copyFile(scrFile, new File("c:\\tmp\\screenshot" + newDate + ".png"));
+		assertEquals("Orders are not uploaded", "Download Valid Orders", driver.findElement(By.xpath("html/body/div[1]/div/table/tbody/tr[12]/td[2]/a")).getText());
+	}
 
 }

@@ -23,14 +23,15 @@ public class OrderSearchPage {
 						
 		driver.findElement(By.xpath("html/body/div[1]/div/form/table/tbody/tr[27]/td[2]/input")).click();
 
-		Alert alt = driver.switchTo().alert();
+		Alert alt;
 		
 		try { 
+			alt = driver.switchTo().alert();
 			alt.dismiss();
 			
 	     }   // try 
 	     catch (NoAlertPresentException Ex){ 
-	    	 System.out.println("Alert is not presented here!");
+	    	 
 	     }   // catch 
 		
 		List<WebElement> list = driver
@@ -41,6 +42,7 @@ public class OrderSearchPage {
 		// Transfer List<WebElement> into ArrayList
 		for (WebElement element1 : list) {
 			webList.add(element1.getText());
+			
 		}
 		for(String str: webList) {
 		    if(str.contains(orderNumber))
@@ -50,6 +52,43 @@ public class OrderSearchPage {
 		
 	}
 	
-	
+	public boolean orderSearch(WebDriver driver,String orderNumber, String seller,String date){
+		
+		
+		
+		WebElement element = driver.findElement(By.xpath(".//*[@id='Seller']"));
+		Select selection = new Select(element);
+		selection.selectByVisibleText(seller);
+		driver.findElement(By.xpath(".//*[@id='Order_Start_Date']")).sendKeys(date);						
+		driver.findElement(By.xpath("html/body/div[1]/div/form/table/tbody/tr[27]/td[2]/input")).click();
+
+		Alert alt;
+		
+		try { 
+			alt = driver.switchTo().alert();
+			alt.dismiss();
+			
+	     }   // try 
+	     catch (NoAlertPresentException Ex){ 
+	    	 
+	     }   // catch 
+		
+		List<WebElement> list = driver
+				.findElements(By
+						.xpath("html/body/div[1]/div/form[1]/table[1]/tbody/tr[/*]/td[3]/a"));
+			
+		List<String> webList = new ArrayList<String>();
+		// Transfer List<WebElement> into ArrayList
+		for (WebElement element1 : list) {
+			webList.add(element1.getText());
+			
+		}
+		for(String str: webList) {
+		    if(str.contains(orderNumber))
+		       return true;
+		}
+		return false;
+		
+	}
 
 }

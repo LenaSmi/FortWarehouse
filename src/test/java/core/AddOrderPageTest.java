@@ -38,6 +38,7 @@ public class AddOrderPageTest {
 	private String userName = "fortwh";
 	private String password = "fortqa333";
 	private DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+	private DateFormat newDateFormat = new SimpleDateFormat("MM/dd/yyyy");
 	private Date date = new Date();
 	private String orderNumber = dateFormat.format(date);
 	
@@ -115,7 +116,8 @@ public class AddOrderPageTest {
 		home.verifyLinkOpenSameTab(driver, ".//*[@id='qm0']/div[1]/a[3]", baseUrl + "/wsn_v2/index.cfm?fuseaction=orders.home",
 				"Format:", "Orders", "html/body/div[1]/div/form/table/tbody/tr[25]/td[1]/label");
 		
-		assertTrue(search.orderSearch(driver, orderNumber, companyName));
+		String date1 = newDateFormat.format(date);
+		assertTrue(search.orderSearch(driver, orderNumber, companyName, date1 ));
 				
 	}
 	
