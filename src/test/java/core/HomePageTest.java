@@ -66,7 +66,7 @@ public class HomePageTest {
 	@Before
 	public void setUp() throws Exception {
 		driver.get(baseUrl + "/login/login.cfm");
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		elem.login(userName, password, driver, textExpectedAfterLogin, expectedUrlAfterLogin);
 	}
 

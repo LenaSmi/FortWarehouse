@@ -1,9 +1,11 @@
 package core;
 
-import static org.junit.Assert.assertEquals;
-
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.io.File;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -38,8 +40,26 @@ public class OrderUploadPage {
 				
 	}
 	
-	public void multipleOrdersUploadTabDelFile(WebDriver driver, String seller){
+	public void multipleOrdersUploadTabDelFile(WebDriver driver, String seller, String uploadFormat, String pathToFile) throws InterruptedException, AWTException{
 		
+		WebElement element = driver.findElement(By.xpath(".//*[@id='Seller']"));
+		Select selection = new Select(element);
+		selection.selectByVisibleText(seller);
+		
+		WebElement element1 = driver.findElement(By.xpath(".//*[@id='version']"));
+		Select selection1 = new Select(element1);
+		selection1.selectByVisibleText(uploadFormat);
+		
+		
+		File fileName = new File(pathToFile);
+		String textFile = fileName.getAbsolutePath(); 
+				
+		WebElement upload = driver.findElement(By.xpath(".//*[@id='orderFile']"));
+		
+		upload.sendKeys(textFile);
+		
+
+        driver.findElement(By.xpath(".//*[@id='uploadForm']/table[3]/tbody/tr[24]/td[2]/input")).click();
 		
 		
 	}
